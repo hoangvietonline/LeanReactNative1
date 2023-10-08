@@ -9,7 +9,6 @@ import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text } from "react-native";
 import UserInfoComponent from "./src/HomeScreen/UserInfoComponent/UserInfoComponent";
 import FriendListComponent from "./src/HomeScreen/FrendListComponent/FriendListComponent";
-import HeadListComponent from "./src/HomeScreen/HeadListComponent/HeadListComponent";
 import GameRecentListComponent from "./src/HomeScreen/GameRecentListComponent/GameRecentListComponent";
 import GameRedbrickOriginalComponent
   from "./src/HomeScreen/GameRedBrickOriginalComponent/GameRedbrickOriginalComponent";
