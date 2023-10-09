@@ -1,6 +1,7 @@
-import { Modal } from "react-native";
-import { forwardRef, ForwardRefRenderFunction, memo, useImperativeHandle, useState } from "react";
+import { Dimensions, Modal, StyleSheet } from "react-native";
+import { forwardRef, ForwardRefRenderFunction, memo, useEffect, useImperativeHandle, useState } from "react";
 import Loading from "../../atoms/Loading";
+import { Colors } from "../../../styles/color";
 
 interface LoadingHandle {
   showLoading: () => void,
@@ -8,9 +9,11 @@ interface LoadingHandle {
 
 }
 
-const [isLoading, setIsLoading] = useState(false);
+
 
 const LoadingIndicator: ForwardRefRenderFunction<LoadingHandle> = (_, ref) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   useImperativeHandle(ref, () => ({
     showLoading: () => {
       setIsLoading(true);
@@ -20,9 +23,24 @@ const LoadingIndicator: ForwardRefRenderFunction<LoadingHandle> = (_, ref) => {
     }
   }));
 
-  return <Modal transparent visible={isLoading}>
-    <Loading />
-  </Modal>;
+  const [wH, setCurrentWidth] = useState({first : 0,second : 0})
+  useEffect(() => {
+    const currentWidth = Dimensions.get("screen").width;
+    const currentHeight = Dimensions.get("screen").height;
+    setCurrentWidth({first: currentWidth,second: currentHeight});
+  }, []);
+
+  const styles = StyleSheet.create({
+
+    pressArea: {
+      width:wH.first,
+      height:wH.second
+    },
+  });
+
+  return (<Modal transparent visible={isLoading}>
+    <Loading styleCustom={styles.pressArea}/>
+  </Modal>);
 };
 
 export default memo(forwardRef(LoadingIndicator));

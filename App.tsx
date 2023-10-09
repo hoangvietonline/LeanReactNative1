@@ -13,19 +13,27 @@ import GameRecentListComponent from "./src/HomeScreen/GameRecentListComponent/Ga
 import GameRedbrickOriginalComponent
   from "./src/HomeScreen/GameRedBrickOriginalComponent/GameRedbrickOriginalComponent";
 import PlayNowComponent from "./src/HomeScreen/PlayNowComponent/PlayNowComponent";
+import LoadingIndicator from "./src/components/molecules/Loading/LoadingIndicator";
+import { setLoadRef } from "./src/utils/ref-setup";
 
 function App(): React.JSX.Element {
+
   return (
     <SafeAreaView style={styles.container}>
+      <LoadingIndicator
+        ref={ref => {
+          setLoadRef(ref);
+        }}
+      />
       <Text style={styles.titleHome}>Home</Text>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollStyle}>
         <UserInfoComponent />
         <FriendListComponent />
-        <GameRecentListComponent/>
-        <GameRedbrickOriginalComponent/>
-        <PlayNowComponent/>
+        <GameRecentListComponent />
+        <GameRedbrickOriginalComponent />
+        <PlayNowComponent />
       </ScrollView>
     </SafeAreaView>
   );

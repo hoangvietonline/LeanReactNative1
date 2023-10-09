@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import FastImage from "react-native-fast-image";
 import { images } from "../../assets/images";
 import React, { memo } from "react";
+import { showLoading } from "../../utils/ref-setup";
 
 const styles = StyleSheet.create({
   textTittle: {
@@ -30,7 +31,7 @@ export interface IHeadList {
 }
 
 const HeadListComponent = ({ title }: IHeadList) => {
-  return <TouchableOpacity style={styles.containerTittle} activeOpacity={0.9}>
+  return <TouchableOpacity style={styles.containerTittle} activeOpacity={0.9} onPress={showLoading}>
     <Text style={styles.textTittle}>{title}</Text>
     <FastImage source={images.icChevronRight} style={styles.image} />
   </TouchableOpacity>;
