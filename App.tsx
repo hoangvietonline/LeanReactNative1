@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import UserInfoComponent from "./src/HomeScreen/UserInfoComponent/UserInfoComponent";
 import FriendListComponent from "./src/HomeScreen/FrendListComponent/FriendListComponent";
 import GameRecentListComponent from "./src/HomeScreen/GameRecentListComponent/GameRecentListComponent";
@@ -15,28 +15,43 @@ import GameRedbrickOriginalComponent
 import PlayNowComponent from "./src/HomeScreen/PlayNowComponent/PlayNowComponent";
 import LoadingIndicator from "./src/components/molecules/Loading/LoadingIndicator";
 import { setLoadRef } from "./src/utils/ref-setup";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import useEmployee from "./src/hooks/useEmployee";
 
 function App(): React.JSX.Element {
-
+  const queryClient = new QueryClient()
   return (
-    <SafeAreaView style={styles.container}>
-      <LoadingIndicator
-        ref={ref => {
-          setLoadRef(ref);
-        }}
-      />
-      <Text style={styles.titleHome}>Home</Text>
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={styles.scrollStyle}>
-        <UserInfoComponent />
-        <FriendListComponent />
-        <GameRecentListComponent />
-        <GameRedbrickOriginalComponent />
-        <PlayNowComponent />
-      </ScrollView>
-    </SafeAreaView>
+    <QueryClientProvider client={queryClient}>
+      <Example/>
+      <SafeAreaView style={styles.container}>
+        <LoadingIndicator
+          ref={ref => {
+            setLoadRef(ref);
+          }}
+        />
+        <Text style={styles.titleHome}>Home</Text>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={styles.scrollStyle}>
+          <UserInfoComponent />
+          <FriendListComponent />
+          <GameRecentListComponent />
+          <GameRedbrickOriginalComponent />
+          <PlayNowComponent />
+        </ScrollView>
+      </SafeAreaView>
+    </QueryClientProvider>
   );
+}
+
+function Example() {
+  const {data,isLoading} = useEmployee();
+
+  console.log(data?.length)
+  // if (isLoading) return 'Loading...'
+  //
+  // if (error) return 'An error has occurred: ' + error.toString()
+  return (<View></View>);
 }
 
 const styles = StyleSheet.create({

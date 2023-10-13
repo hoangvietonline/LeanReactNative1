@@ -4,6 +4,8 @@ import { FriendModel } from "../../model/friend-model";
 import FriendItem from "./Item/FriendItem";
 import HeadListComponent from "../HeadListComponent/HeadListComponent";
 import FlatList = Animated.FlatList;
+import useEmployee from "../../hooks/useEmployee";
+import { EmployeeModel } from "../../model/employee-model";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +20,7 @@ const styles = StyleSheet.create({
 });
 
 const renderFriendItem = ({ item }: {
-  item: FriendModel
+  item: EmployeeModel
 }) => {
   return <FriendItem model={item} />;
 };
@@ -31,11 +33,14 @@ const FriendListComponent = () => {
     new FriendModel("Hichaha", "", false, "haha"),
     new FriendModel("Nguyen", "", true, "hkhf")
   ];
+
+  const {data: employees,isLoading} = useEmployee();
+
   return <View style={styles.container}>
     <HeadListComponent title={"Friends"} />
     <View style={styles.space}></View>
     <FlatList
-      data={friends}
+      data={employees}
       renderItem={renderFriendItem}
       horizontal={true}
       showsHorizontalScrollIndicator={false}

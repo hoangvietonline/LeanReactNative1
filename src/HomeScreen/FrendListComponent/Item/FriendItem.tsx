@@ -1,8 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { memo } from "react";
 import FastImage from "react-native-fast-image";
-import { FriendModel } from "../../../model/friend-model";
 import { images } from "../../../assets/images";
+import { EmployeeModel } from "../../../model/employee-model";
 
 const styles = StyleSheet.create({
   container: {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 });
 
 export interface IFriendItem {
-  model: FriendModel;
+  model: EmployeeModel;
 }
 
 const FriendItem = ({ model }: IFriendItem) => {
@@ -61,20 +61,19 @@ const FriendItem = ({ model }: IFriendItem) => {
       <View
         style={[
           styles.avatarStyleContainer,
-          model.onlineStatus ? styles.onlineStyle : styles.offlineStyle
+          model.status == "active" ? styles.onlineStyle : styles.offlineStyle
         ]}>
         <FastImage
-          source={model.friendPreview ? { uri: model.friendPreview }
-            : images.imgAvatarDefault}
+          source={images.imgAvatarDefault}
           style={styles.image}
           resizeMode={"cover"}
         />
       </View>
       <View style={styles.nameContainer}>
-        <Text numberOfLines={1} style={styles.textName}>{model.friendUserName}</Text>
-        {model.worldName && (
+        <Text numberOfLines={1} style={styles.textName}>{model.name}</Text>
+        {model.gender && (
           <Text numberOfLines={1} style={styles.textSub}>
-            {model.worldName}
+            {model.gender}
           </Text>
         )}
       </View>
