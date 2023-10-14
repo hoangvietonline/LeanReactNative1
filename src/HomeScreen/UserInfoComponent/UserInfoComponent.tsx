@@ -10,12 +10,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     marginBottom: 10,
-    marginTop: 20
+    marginTop: 30
   },
   image: {
     width: 40,
     height: 40,
-    marginRight: 10,
+    marginEnd: 10,
+    marginStart:14,
     backgroundColor: "#FFFFFF",
     borderRadius: 20
   },

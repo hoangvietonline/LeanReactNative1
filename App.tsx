@@ -17,6 +17,7 @@ import LoadingIndicator from "./src/components/molecules/Loading/LoadingIndicato
 import { setLoadRef } from "./src/utils/ref-setup";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import useEmployee from "./src/hooks/useEmployee";
+import GameTrendingListComponent from "./src/HomeScreen/GameTrendingListComponent/GameTrendingListComponent";
 
 function App(): React.JSX.Element {
   const queryClient = new QueryClient()
@@ -37,6 +38,7 @@ function App(): React.JSX.Element {
           <FriendListComponent />
           <GameRecentListComponent />
           <GameRedbrickOriginalComponent />
+          <GameTrendingListComponent />
           <PlayNowComponent />
         </ScrollView>
       </SafeAreaView>

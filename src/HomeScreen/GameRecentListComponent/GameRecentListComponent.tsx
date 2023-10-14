@@ -17,6 +17,12 @@ const styles = StyleSheet.create({
   },
   space:{
     height:12
+  },
+  titleStyle: {
+    marginStart: 14
+  },
+  listStyle: {
+    paddingStart: 14
   }
 });
 
@@ -28,13 +34,15 @@ const renderGameItem = ({ item }: {
 
 const GameRecentListComponent = () => {
   return <View style={styles.container}>
-    <HeadListComponent title={"Recently Played"} />
+    <HeadListComponent title={"Recently Played"} style={styles.titleStyle} />
     <View style={styles.space}></View>
     <FlatList
+      style={styles.listStyle}
       data={RedbrickOriginalMockData}
       renderItem={renderGameItem}
       horizontal={true}
-      // showsHorizontalScrollIndicator={false}
+      automaticallyAdjustContentInsets={false}
+      showsHorizontalScrollIndicator={false}
       keyExtractor={(item, index) => `${"item"}-${index}`}
     />
   </View>;

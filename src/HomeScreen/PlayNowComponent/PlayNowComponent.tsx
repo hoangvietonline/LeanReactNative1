@@ -17,6 +17,11 @@ const styles = StyleSheet.create({
   },
   space: {
     height: 12
+  }, titleStyle: {
+    marginStart: 14
+  },
+  listStyle: {
+    paddingStart: 14
   }
 });
 
@@ -28,26 +33,32 @@ const renderGameItem = ({ item }: {
 
 const PlayNowComponent = () => {
   return <View style={styles.container}>
-    <HeadListComponent title={"Play Now"} />
+    <HeadListComponent title={"Play Now"} style={styles.titleStyle} />
     <View style={styles.space}></View>
     <FlatList
+      style={styles.listStyle}
       data={PlayNowMockData.slice(0, 8)}
       renderItem={renderGameItem}
       horizontal={true}
+      automaticallyAdjustContentInsets={false}
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item, index) => `${"item"}-${index}`}
     />
     <FlatList
+      style={styles.listStyle}
       data={PlayNowMockData.slice(8, 17)}
       renderItem={renderGameItem}
       horizontal={true}
+      automaticallyAdjustContentInsets={false}
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item, index) => `${"item"}-${index}`}
     />
     <FlatList
+      style={styles.listStyle}
       data={PlayNowMockData.slice(18, PlayNowMockData.length)}
       renderItem={renderGameItem}
       horizontal={true}
+      automaticallyAdjustContentInsets={false}
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item, index) => `${"item"}-${index}`}
     />

@@ -27,11 +27,12 @@ const styles = StyleSheet.create({
 
 export interface IHeadList {
   title: string,
+  style: any
   // onPressCallback: () => void
 }
 
-const HeadListComponent = ({ title }: IHeadList) => {
-  return <TouchableOpacity style={styles.containerTittle} activeOpacity={0.9} onPress={showLoading}>
+const HeadListComponent = ({ title, style }: IHeadList) => {
+  return <TouchableOpacity style={[styles.containerTittle, style]} activeOpacity={0.9} onPress={showLoading}>
     <Text style={styles.textTittle}>{title}</Text>
     <FastImage source={images.icChevronRight} style={styles.image} />
   </TouchableOpacity>;
