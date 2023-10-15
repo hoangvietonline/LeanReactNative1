@@ -1,8 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import FastImage from "react-native-fast-image";
-import { images } from "../../assets/images";
+import { images } from "../../../assets/images";
 import React, { memo } from "react";
-import { showLoading } from "../../utils/ref-setup";
+import { showLoading } from "../../../utils/ref-setup";
 
 const styles = StyleSheet.create({
   textTittle: {

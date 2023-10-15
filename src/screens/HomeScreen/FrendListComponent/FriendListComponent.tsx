@@ -1,10 +1,10 @@
 import { Animated, StyleSheet, View } from "react-native";
 import React, { memo } from "react";
-import { FriendModel } from "../../model/friend-model";
+import { FriendModel } from "../../../model/friend-model";
 import FriendItem from "./Item/FriendItem";
 import HeadListComponent from "../HeadListComponent/HeadListComponent";
-import useEmployee from "../../hooks/useEmployee";
-import { EmployeeModel } from "../../model/employee-model";
+import useEmployee from "../../../hooks/useEmployee";
+import { EmployeeModel } from "../../../model/employee-model";
 import FlatList = Animated.FlatList;
 
 const styles = StyleSheet.create({

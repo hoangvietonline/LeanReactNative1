@@ -1,12 +1,10 @@
 import { Animated, StyleSheet, View } from "react-native";
+import React, { memo } from "react";
 import HeadListComponent from "../HeadListComponent/HeadListComponent";
-import { RedbrickOriginalMockData } from "../../constant/mock/redbrick-original-mock-data";
-import React from "react";
-import { GameMockModel } from "../../model/game-mock-model";
 import HomeGameItem from "../HomeGameItem/HomeGameItem";
-import { TrendingMockData } from "../../constant/mock/trending-mock-data";
+import { GameMockModel } from "../../../model/game-mock-model";
+import { PlayNowMockData } from "../../../constant/mock/play-now-mock-data";
 import FlatList = Animated.FlatList;
-
 
 const styles = StyleSheet.create({
   container: {
@@ -25,7 +23,7 @@ const styles = StyleSheet.create({
   },
   listStyle: {
     paddingStart: 14,
-    marginTop:8
+    marginTop: 8
   }
 });
 
@@ -35,13 +33,13 @@ const renderGameItem = ({ item }: {
   return <HomeGameItem gameMockModel={item} style={styles.item} />;
 };
 
-const GameTrendingListComponent = () => {
+const PlayNowComponent = () => {
   return <View style={styles.container}>
-    <HeadListComponent title={"Trending"} style={styles.titleStyle} />
+    <HeadListComponent title={"Play Now"} style={styles.titleStyle} />
     <View style={styles.space}></View>
     <FlatList
       style={styles.listStyle}
-      data={TrendingMockData.slice(0, 6)}
+      data={PlayNowMockData.slice(0, 8)}
       renderItem={renderGameItem}
       horizontal={true}
       automaticallyAdjustContentInsets={false}
@@ -50,7 +48,16 @@ const GameTrendingListComponent = () => {
     />
     <FlatList
       style={styles.listStyle}
-      data={TrendingMockData.slice(6, RedbrickOriginalMockData.length)}
+      data={PlayNowMockData.slice(8, 17)}
+      renderItem={renderGameItem}
+      horizontal={true}
+      automaticallyAdjustContentInsets={false}
+      showsHorizontalScrollIndicator={false}
+      keyExtractor={(item, index) => `${"item"}-${index}`}
+    />
+    <FlatList
+      style={styles.listStyle}
+      data={PlayNowMockData.slice(18, PlayNowMockData.length)}
       renderItem={renderGameItem}
       horizontal={true}
       automaticallyAdjustContentInsets={false}
@@ -60,4 +67,4 @@ const GameTrendingListComponent = () => {
   </View>;
 };
 
-export default GameTrendingListComponent;
+export default memo(PlayNowComponent);

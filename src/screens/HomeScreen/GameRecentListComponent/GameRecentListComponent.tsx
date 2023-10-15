@@ -1,9 +1,9 @@
 import { Animated, StyleSheet, View } from "react-native";
 import React, { memo } from "react";
 import HeadListComponent from "../HeadListComponent/HeadListComponent";
-import { RedbrickOriginalMockData } from "../../constant/mock/redbrick-original-mock-data";
+import { RedbrickOriginalMockData } from "../../../constant/mock/redbrick-original-mock-data";
 import HomeGameItem from "../HomeGameItem/HomeGameItem";
-import { GameMockModel } from "../../model/game-mock-model";
+import { GameMockModel } from "../../../model/game-mock-model";
 import FlatList = Animated.FlatList;
 
 const styles = StyleSheet.create({

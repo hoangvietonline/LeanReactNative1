@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { memo } from "react";
 import FastImage from "react-native-fast-image";
-import { images } from "../../assets/images";
+import { images } from "../../../assets/images";
 
 
 const styles = StyleSheet.create({

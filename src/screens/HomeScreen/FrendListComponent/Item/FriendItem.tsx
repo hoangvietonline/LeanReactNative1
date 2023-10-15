@@ -1,8 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { memo } from "react";
 import FastImage from "react-native-fast-image";
-import { images } from "../../../assets/images";
-import { EmployeeModel } from "../../../model/employee-model";
+import { images } from "../../../../assets/images";
+import { EmployeeModel } from "../../../../model/employee-model";
 
 const styles = StyleSheet.create({
   container: {

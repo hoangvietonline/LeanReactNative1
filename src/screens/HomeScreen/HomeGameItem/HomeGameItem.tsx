@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { GameMockModel } from "../../model/game-mock-model";
+import { GameMockModel } from "../../../model/game-mock-model";
 import FastImage from "react-native-fast-image";
 import { memo } from "react";
 
