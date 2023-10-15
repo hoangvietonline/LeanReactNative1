@@ -16,12 +16,14 @@ const styles = StyleSheet.create({
     width: 143
   },
   space: {
-    height: 12
-  }, titleStyle: {
+    height: 4
+  },
+  titleStyle: {
     marginStart: 14
   },
   listStyle: {
-    paddingStart: 14
+    paddingStart: 14,
+    marginTop: 8
   }
 });
 

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginStart: 14
   },
   listStyle: {
-    paddingStart: 14
+    paddingStart: 14,
   }
 });
 
