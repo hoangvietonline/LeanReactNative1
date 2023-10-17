@@ -9,8 +9,6 @@ interface LoadingHandle {
 
 }
 
-
-
 const LoadingIndicator: ForwardRefRenderFunction<LoadingHandle> = (_, ref) => {
   const [isLoading, setIsLoading] = useState(false);
 

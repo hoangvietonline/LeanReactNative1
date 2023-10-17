@@ -1,17 +1,34 @@
-import { Dimensions, StyleSheet, TextInput, View } from "react-native";
-import React from "react";
+import { Dimensions, Pressable, StyleSheet, TextInput, View } from "react-native";
+import React, { useState } from "react";
 import FastImage from "react-native-fast-image";
 import { images } from "../../../assets/images";
 
-const BottomToolChatComponent = () => {
+
+export interface IBottomToolChatComponent {
+  callback: (text: string) => void,
+}
+
+const BottomToolChatComponent = ({ callback }: IBottomToolChatComponent) => {
+  const [textChange, onChangeText] = useState("");
+
+  const sendDataToParent = () => {
+    callback(textChange); // Invoke the callback with some data
+    onChangeText("");
+  };
+
   return <View style={styles.root}>
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.input}
+        value={textChange}
+        onChangeText={onChangeText}
         placeholder="Enter mes"
         keyboardType="default"
       />
-      <FastImage source={images.icSend} style={styles.iconSend} />
+      <Pressable onPress={sendDataToParent}>
+        <FastImage source={images.icSend} style={styles.iconSend} />
+      </Pressable>
+
     </View>
     <View style={styles.containerSelectPhoto}>
       <FastImage source={images.icSelectPhoto} style={styles.iconSelectPhoto} />
@@ -22,14 +39,13 @@ const BottomToolChatComponent = () => {
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
-    position: "absolute",
     bottom: 0,
-    height: 44,
     width: Dimensions.get("screen").width,
-    marginBottom: 56,
+    paddingVertical: 24,
     paddingHorizontal: 24,
     justifyContent: "flex-start",
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "#FFF"
   },
   inputContainer: {
     flexDirection: "row",
@@ -62,7 +78,7 @@ const styles = StyleSheet.create({
     padding: 3,
     shadowRadius: 2,
     shadowOpacity: 0.5,
-    justifyContent: "center", 
+    justifyContent: "center",
     alignItems: "center"
   },
   iconSelectPhoto: {
