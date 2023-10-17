@@ -17,7 +17,7 @@ const ChatItem = ({ chatModel }: IChatItem) => {
   </View>;
 };
 
-const calculateTimeAgo = (timestampInMillis: Moment) => {
+const calculateTimeAgo = (timestampInMillis: number) => {
   const duration = moment.duration(moment().diff(timestampInMillis));
 
   if (duration.asSeconds() < 60) {

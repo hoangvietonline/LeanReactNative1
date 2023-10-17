@@ -8,24 +8,24 @@ import moment from "moment";
 
 const ChatScreen = () => {
   const lsChat = [
-    new ChatModel(1, "tao la viet ne", true,moment().subtract(30,"minutes") ),
-    new ChatModel(2, "Viet hã, lâu ngày không gặp", false, moment().subtract(20,"minutes") ),
-    new ChatModel(3, "Dạo này khoẻ không mi?", false,  moment().subtract(19,"minutes") ),
-    new ChatModel(4, "Tao khoẻ lắm, còn m vẫn khoẻ chớ, alo alo nghe gọi trả lời nghe hú hé alo lao", true,  moment().subtract(10,"minutes") )
+    new ChatModel(1, "tao la viet ne", true,moment().subtract(30,"minutes").valueOf() ),
+    new ChatModel(2, "Viet hã, lâu ngày không gặp", false, moment().subtract(20,"minutes").valueOf() ),
+    new ChatModel(3, "Dạo này khoẻ không mi?", false,  moment().subtract(19,"minutes").valueOf() ),
+    new ChatModel(4, "Tao khoẻ lắm, còn m vẫn khoẻ chớ, alo alo nghe gọi trả lời nghe hú hé alo lao", true,  moment().subtract(10,"minutes").valueOf() )
   ];
 
   const [conversation, addChat] = useState(lsChat);
 
   const handleCallback = (mess: string) => {
     conversation.push(
-      new ChatModel(6, mess, true, moment())
+      new ChatModel(6, mess, true, moment().valueOf())
     );
     addChat(conversation);
 
     const reply = async () => {
       await delay(3000);
       conversation.push(
-        new ChatModel(6, "kakak hu he kakoaoaoa", false, moment())
+        new ChatModel(6, "kakak hu he kakoaoaoa", false, moment().valueOf())
       );
       addChat(conversation);
     };

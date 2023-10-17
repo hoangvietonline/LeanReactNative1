@@ -4,9 +4,9 @@ export class ChatModel {
   id: number;
   content: string;
   isMe: boolean;
-  time: Moment;
+  time: number;
 
-  constructor(id : number,content:string,isMe:boolean,time:Moment) {
+  constructor(id : number,content:string,isMe:boolean,time:number) {
     this.id = id;
     this.content = content;
     this.isMe = isMe;
