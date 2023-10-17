@@ -17,17 +17,19 @@ const ChatScreen = () => {
   const [conversation, addChat] = useState(lsChat);
 
   const handleCallback = (mess: string) => {
-    conversation.push(
-      new ChatModel(6, mess, true, moment().valueOf())
-    );
-    addChat(conversation);
+    addChat(prevState => {
+      let newMessages: ChatModel[] = [...prevState];
+      newMessages.push(new ChatModel(6, mess, true, moment().valueOf()));
+      return newMessages;
+    });
 
     const reply = async () => {
       await delay(3000);
-      conversation.push(
-        new ChatModel(6, "kakak hu he kakoaoaoa", false, moment().valueOf())
-      );
-      addChat(conversation);
+      addChat(prevState => {
+        let newMessages: ChatModel[] = [...prevState];
+        newMessages.push(new ChatModel(6, "kakak hu he kakoaoaoa", false, moment().valueOf()));
+        return newMessages;
+      });
     };
     reply();
   };
