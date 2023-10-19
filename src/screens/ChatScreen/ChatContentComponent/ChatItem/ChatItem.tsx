@@ -1,18 +1,27 @@
 import { StyleSheet, Text, View } from "react-native";
-import { ChatModel } from "../../../../model/chat-model";
-import moment, { Moment } from "moment";
+import { ChatModel, MessageStatus } from "../../../../model/chat-model";
+import moment from "moment";
+import FastImage from "react-native-fast-image";
+import { images } from "../../../../assets/images";
 
 export interface IChatItem {
   chatModel: ChatModel,
 }
 
 const ChatItem = ({ chatModel }: IChatItem) => {
+  const isFail = chatModel.status == MessageStatus.FAILED;
+
   return <View style={chatModel.isMe ? styles.rootIsMe : styles.rootNotMe}>
-    <View style={[styles.containerCommon, chatModel.isMe ? styles.containerIsMe : styles.containerNotMe]}>
+    <View
+      style={[styles.containerCommon, chatModel.isMe ? (isFail ? styles.containerIsMeFail : styles.containerIsMe) : styles.containerNotMe]}>
       <Text
-        style={[styles.contentCommon, chatModel.isMe ? styles.contentIsMe : styles.contentNotMe]}>{chatModel.content}</Text>
+        style={[styles.contentCommon, chatModel.isMe ?
+          (isFail ? styles.contentIsMeFail : styles.contentIsMe)
+          : styles.contentNotMe]}>{chatModel.content}</Text>
       <Text
-        style={[styles.timeCommon, chatModel.isMe ? styles.timeIsMe : styles.timeNotMe]}>{calculateTimeAgo(chatModel.time)}</Text>
+        style={[styles.timeCommon, chatModel.isMe ? (isFail ? styles.timeIsMeFail : styles.timeIsMe) : styles.timeNotMe]}>{calculateTimeAgo(chatModel.time)}</Text>
+
+      <FastImage source={images.icSendFail} style={isFail ? styles.imageSendFail : styles.hideSendFail} />
     </View>
   </View>;
 };
@@ -68,6 +77,9 @@ const styles = StyleSheet.create({
   containerIsMe: {
     backgroundColor: "#FF828B"
   },
+  containerIsMeFail: {
+    backgroundColor: "#D9D9D9"
+  },
   contentCommon: {
     fontSize: 14,
     fontStyle: "normal",
@@ -79,6 +91,9 @@ const styles = StyleSheet.create({
   contentIsMe: {
     color: "#FFF"
   },
+  contentIsMeFail: {
+    color: "#CD2D2D"
+  },
   contentNotMe: {
     color: "#2C4364"
   },
@@ -87,15 +102,30 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "400",
     lineHeight: 16,
-    letterSpacing: -0.1
+    letterSpacing: -0.1,
+    marginTop: 2,
+    marginEnd: 26
   },
   timeIsMe: {
     color: "#D6D9DF"
   },
+  timeIsMeFail: {
+    color: "#FFFFFF"
+  },
   timeNotMe: {
     color: "#ADB4C0"
+  },
+  imageSendFail: {
+    width: 20,
+    height: 20,
+    position: "absolute",
+    bottom: 16,
+    end: 16
+  },
+  hideSendFail: {
+    width: 0,
+    height: 0
   }
-
 });
 
 export default ChatItem;

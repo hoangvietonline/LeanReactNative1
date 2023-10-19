@@ -5,5 +5,6 @@ export const images = {
   icChevronLeft: require("./ic_chevron_left.png"),
   icAvatar: require("./ic_avatar.png"),
   icSend: require("./ic_send.png"),
-  icSelectPhoto: require("./ic_select_photo.png")
+  icSelectPhoto: require("./ic_select_photo.png"),
+  icSendFail: require("./ic_send_fail.png")
 }

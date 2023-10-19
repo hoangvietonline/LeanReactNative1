@@ -1,4 +1,4 @@
-import { Dimensions, Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Dimensions, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
 import FastImage from "react-native-fast-image";
 import { images } from "../../../assets/images";
@@ -18,13 +18,7 @@ const BottomToolChatComponent = ({ callback }: IBottomToolChatComponent) => {
 
   return <View style={styles.root}>
     <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.input}
-        value={textChange}
-        onChangeText={onChangeText}
-        placeholder="Enter mes"
-        keyboardType="default"
-      />
+      <CustomText textInput={textChange} onChangeText={onChangeText} />
       <Pressable onPress={sendDataToParent}>
         <FastImage source={images.icSend} style={styles.iconSend} />
       </Pressable>
@@ -34,6 +28,29 @@ const BottomToolChatComponent = ({ callback }: IBottomToolChatComponent) => {
       <FastImage source={images.icSelectPhoto} style={styles.iconSelectPhoto} />
     </View>
   </View>;
+};
+
+interface Props {
+  textInput: string,
+  onChangeText: (textChange: string) => void
+}
+
+const CustomText = ({ textInput, onChangeText }: Props) => {
+  const texts = textInput.split(" ");
+  return <TextInput
+    style={styles.input}
+    onChangeText={onChangeText}
+    placeholder="Enter mes"
+    placeholderTextColor="#94959B"
+    keyboardType="default">{texts.map(text => {
+    if (text != texts[0]) {
+      text = ` ${text}`;
+    }
+    if (text.toLowerCase().trimStart() == ("like")) {
+      return <Text style={styles.nestedText}>{text}</Text>;
+    }
+    return `${text}`;
+  })}</TextInput>;
 };
 
 const styles = StyleSheet.create({
@@ -59,8 +76,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   },
   input: {
-    marginStart: 20,
-    flex: 1
+    marginHorizontal: 20,
+    flex: 1,
+    fontSize:14,
+    color:"#2C4364",
+    fontWeight:"500",
+    letterSpacing: -0.14
   },
   iconSend: {
     width: 26,
@@ -69,7 +90,7 @@ const styles = StyleSheet.create({
   },
   containerSelectPhoto: {
     backgroundColor: "#FFF",
-    marginStart: 6,
+    marginStart: 8,
     shadowColor: "#000000",
     shadowOffset: {
       width: 0,
@@ -84,6 +105,15 @@ const styles = StyleSheet.create({
   iconSelectPhoto: {
     width: 20,
     height: 20
+  },
+  nestedText:{
+    marginHorizontal: 20,
+    flex: 1,
+    fontSize:14,
+    color:"#FD5A63",
+    fontWeight:"700",
+    letterSpacing: -0.14
+
   }
 });
 
