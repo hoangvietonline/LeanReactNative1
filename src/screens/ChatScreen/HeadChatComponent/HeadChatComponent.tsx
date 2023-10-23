@@ -1,11 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import { images } from "../../../assets/images";
 import LinearGradient from "react-native-linear-gradient";
 
-const HeadChatComponent = () => {
+export interface IHeadChatComponent {
+  onBackPress: () => void;
+}
+
+const HeadChatComponent = ({ onBackPress }: IHeadChatComponent) => {
   return <View style={styles.container}>
-    <FastImage resizeMode={"contain"} source={images.icChevronLeft} style={styles.imageBack} />
+    <TouchableOpacity style={styles.backgroundButton} onPress={onBackPress}>
+      <FastImage resizeMode={"contain"} source={images.icChevronLeft} style={styles.imageBack} />
+    </TouchableOpacity>
+
     <View style={styles.avatarContainer}>
       <LinearGradient colors={["#3ADBAA", "#3FD3B1"]} style={styles.avatarBackground}>
         <FastImage source={images.icAvatar} style={styles.image} />
@@ -30,11 +37,8 @@ const styles = StyleSheet.create({
     height: 50
   },
   imageBack: {
-    marginStart: 24,
     width: 18,
     height: 24,
-    paddingVertical: 13,
-    paddingHorizontal: 9
   },
   avatarBackground: {
     width: 50,
@@ -72,6 +76,11 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     letterSpacing: -0.32,
     marginStart: 13
+  },
+  backgroundButton: {
+    marginStart: 24,
+    paddingHorizontal: 9,
+    paddingVertical: 13
   }
 });
 

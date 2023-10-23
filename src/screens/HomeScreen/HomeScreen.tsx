@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text } from "react-native";
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text } from "react-native";
 import LoadingIndicator from "../../components/molecules/Loading/LoadingIndicator";
 import { setLoadRef } from "../../utils/ref-setup";
 import UserInfoComponent from "./UserInfoComponent/UserInfoComponent";
@@ -8,15 +8,22 @@ import GameRedbrickOriginalComponent from "./GameRedBrickOriginalComponent/GameR
 import GameTrendingListComponent from "./GameTrendingListComponent/GameTrendingListComponent";
 import PlayNowComponent from "./PlayNowComponent/PlayNowComponent";
 import React from "react";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../Navigation/Navigator.config";
 
 const HomeScreen = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return <SafeAreaView style={styles.container}>
     <LoadingIndicator
       ref={ref => {
         setLoadRef(ref);
       }}
     />
-    <Text style={styles.titleHome}>Home</Text>
+    <Pressable onPress={goBack}><Text style={styles.titleHome}>Home</Text></Pressable>
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       style={styles.scrollStyle}>

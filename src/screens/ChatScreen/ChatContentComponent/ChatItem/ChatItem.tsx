@@ -13,15 +13,18 @@ const ChatItem = ({ chatModel }: IChatItem) => {
 
   return <View style={chatModel.isMe ? styles.rootIsMe : styles.rootNotMe}>
     <View
-      style={[styles.containerCommon, chatModel.isMe ? (isFail ? styles.containerIsMeFail : styles.containerIsMe) : styles.containerNotMe]}>
+      style={[styles.containerCommon, chatModel.isMe ? (isFail
+        ? styles.containerIsMeFail : styles.containerIsMe) : styles.containerNotMe]}>
       <Text
         style={[styles.contentCommon, chatModel.isMe ?
           (isFail ? styles.contentIsMeFail : styles.contentIsMe)
           : styles.contentNotMe]}>{chatModel.content}</Text>
       <Text
-        style={[styles.timeCommon, chatModel.isMe ? (isFail ? styles.timeIsMeFail : styles.timeIsMe) : styles.timeNotMe]}>{calculateTimeAgo(chatModel.time)}</Text>
+        style={[styles.timeCommon, chatModel.isMe ? (isFail
+          ? styles.timeIsMeFail : styles.timeIsMe) : styles.timeNotMe]}>{calculateTimeAgo(chatModel.time)}</Text>
 
-      <FastImage source={images.icSendFail} style={isFail ? styles.imageSendFail : styles.hideSendFail} />
+      <FastImage source={images.icSendFail} style={isFail
+        ? styles.imageSendFail : styles.hideSendFail} />
     </View>
   </View>;
 };
