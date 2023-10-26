@@ -1,25 +1,33 @@
 import { Dimensions, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useState } from "react";
+import React, { MutableRefObject, useState } from "react";
 import FastImage from "react-native-fast-image";
 import { images } from "../../../assets/images";
 
 
 export interface IBottomToolChatComponent {
+  touchableRef: MutableRefObject<any>,
   callback: (text: string) => void,
+  onShowPopup: () => void
 }
 
-const BottomToolChatComponent = ({ callback }: IBottomToolChatComponent) => {
+const BottomToolChatComponent = ({ touchableRef, callback, onShowPopup }: IBottomToolChatComponent) => {
   const [textChange, onChangeText] = useState("");
 
   const sendDataToParent = () => {
-    callback(textChange); // Invoke the callback with some data
-    onChangeText("");
+    if (textChange != "") {
+      callback(textChange); // Invoke the callback with some data
+      onChangeText("");
+    }
+  };
+
+  const showPopup = () => {
+    onShowPopup();
   };
 
   return <View style={styles.root}>
     <View style={styles.inputContainer}>
-      <CustomText textInput={textChange} onChangeText={onChangeText} />
-      <Pressable onPress={sendDataToParent}>
+      <CustomText textInput={textChange} onChangeText={onChangeText} showPopupEmoji={showPopup} />
+      <Pressable onPress={sendDataToParent} ref={touchableRef}>
         <FastImage source={images.icSend} style={styles.iconSend} />
       </Pressable>
 
@@ -32,21 +40,25 @@ const BottomToolChatComponent = ({ callback }: IBottomToolChatComponent) => {
 
 interface Props {
   textInput: string,
-  onChangeText: (textChange: string) => void
+  onChangeText: (textChange: string) => void,
+  showPopupEmoji: () => void
 }
 
-const CustomText = ({ textInput, onChangeText }: Props) => {
+const CustomText = ({ textInput, onChangeText, showPopupEmoji }: Props) => {
   const texts = textInput.split(" ");
   return <TextInput
     style={styles.input}
     onChangeText={onChangeText}
     placeholder="Enter mes"
     placeholderTextColor="#94959B"
+    key={"customText"}
     keyboardType="default">{texts.map(text => {
     if (text != texts[0]) {
       text = ` ${text}`;
     }
-    if (text.toLowerCase().trimStart() == ("like")) {
+    if (text.toLowerCase().trim() == ("like") && text.trim() == texts[texts.length - 1].trim()) {
+      console.log(text);
+      showPopupEmoji();
       return <Text style={styles.nestedText}>{text}</Text>;
     }
     return `${text}`;

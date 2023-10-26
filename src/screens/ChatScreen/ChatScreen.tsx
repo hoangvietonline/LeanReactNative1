@@ -1,4 +1,4 @@
-import { Alert, Modal, SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet, Text } from "react-native";
 import HeadChatComponent from "./HeadChatComponent/HeadChatComponent";
 import ChatContentComponent from "./ChatContentComponent/ChatContentComponent";
 import BottomToolChatComponent from "./BottomToolChatComponent/BottomToolChatComponent";
@@ -6,7 +6,8 @@ import { ChatModel, MessageStatus } from "../../model/chat-model";
 import React, { useState } from "react";
 import moment from "moment";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { RootStackParamList, Screens } from "../../Navigation/Navigator.config";
+import { RootStackParamList } from "../../Navigation/Navigator.config";
+import { Popover, usePopover } from "react-native-modal-popover";
 
 const ChatScreen = () => {
   const lsChat = [
@@ -24,9 +25,20 @@ const ChatScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const {
+    openPopover,
+    closePopover,
+    popoverVisible,
+    touchableRef,
+    popoverAnchorRect
+  } = usePopover();
 
   const goBack = () => {
     navigation.goBack();
+  };
+
+  const handleShowPopup = () => {
+    openPopover();
   };
 
   const handleCallback = (mess: string) => {
@@ -49,19 +61,20 @@ const ChatScreen = () => {
   };
 
   return <SafeAreaView style={styles.container}>
-    <Modal
-      animationType="slide"
-      transparent={true}
-      visible={modalVisible}
-      onRequestClose={() => {
-        Alert.alert("Modal has been closed.");
-        setModalVisible(!modalVisible);
-      }}>
-
-    </Modal>
+    <Popover
+      contentStyle={styles.content}
+      arrowStyle={styles.arrow}
+      visible={popoverVisible}
+      onClose={closePopover}
+      backgroundStyle={styles.background}
+      fromRect={popoverAnchorRect}
+      supportedOrientations={["portrait", "landscape"]}>
+      <Text>Hello from inside popover!</Text>
+    </Popover>
     <HeadChatComponent onBackPress={goBack}/>
     <ChatContentComponent lsChat={conversation} />
-    <BottomToolChatComponent callback={handleCallback} />
+    <BottomToolChatComponent touchableRef={touchableRef}
+                             callback={handleCallback} onShowPopup={handleShowPopup} />
   </SafeAreaView>;
 };
 
@@ -74,6 +87,17 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     backgroundColor: "#FFCACD4D"
+  },
+  content: {
+    padding: 16,
+    backgroundColor: "pink",
+    borderRadius: 8
+  },
+  arrow: {
+    borderTopColor: "pink"
+  },
+  background: {
+    backgroundColor: "transparent"
   }
 });
 
